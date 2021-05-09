@@ -37,7 +37,6 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({ continents }) {
-   console.log(continents)
    return (
       <div>
          <Head>
