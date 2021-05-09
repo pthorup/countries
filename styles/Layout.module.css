@@ -1,0 +1,25 @@
+.container {
+   display: grid;
+   grid-template-areas:
+      'navbar main main main'
+      'navbar main main main'
+      'navbar footer footer footer';
+   grid-template-rows: auto;
+   border: 2px solid red;
+   height: 100vh;
+}
+
+.navbar {
+   border: 1px solid black;
+   grid-area: navbar;
+}
+.main {
+   border: 1px solid green;
+   grid-area: main;
+   height: 92vh;
+}
+.footer {
+   border: 1px solid purple;
+   grid-area: footer;
+   height: 8vh;
+}

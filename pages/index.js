@@ -4,37 +4,37 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
-export const getStaticProps = async () => {
-   const client = new ApolloClient({
-      uri: 'https://countries.trevorblades.com/',
-      cache: new InMemoryCache(),
-   })
+// export const getStaticProps = async () => {
+//    const client = new ApolloClient({
+//       uri: 'https://countries.trevorblades.com/',
+//       cache: new InMemoryCache(),
+//    })
 
-   const { data } = await client.query({
-      query: gql`
-         {
-            continents {
-               name
-               countries {
-                  code
-                  name
-                  capital
-                  emoji
-                  languages {
-                     name
-                  }
-               }
-            }
-         }
-      `,
-   })
+//    const { data } = await client.query({
+//       query: gql`
+//          {
+//             continents {
+//                name
+//                countries {
+//                   code
+//                   name
+//                   capital
+//                   emoji
+//                   languages {
+//                      name
+//                   }
+//                }
+//             }
+//          }
+//       `,
+//    })
 
-   return {
-      props: {
-         continents: data.continents,
-      },
-   }
-}
+//    return {
+//       props: {
+//          continents: data.continents,
+//       },
+//    }
+// }
 
 export default function Home({ continents }) {
    return (
@@ -46,7 +46,7 @@ export default function Home({ continents }) {
          </Head>
 
          <main>
-            {continents.map((continent) => (
+            {/* {continents.map((continent) => (
                <div key={continent.name}>
                   <a>{continent.name}</a>
                   {continent.countries.map((country) => (
@@ -55,7 +55,9 @@ export default function Home({ continents }) {
                      </Link>
                   ))}
                </div>
-            ))}
+            ))} */}
+
+            <div>home</div>
          </main>
       </div>
    )
