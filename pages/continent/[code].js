@@ -1,0 +1,75 @@
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+import Link from 'next/link'
+
+export const getStaticPaths = async () => {
+   const client = new ApolloClient({
+      uri: 'https://countries.trevorblades.com/',
+      cache: new InMemoryCache(),
+   })
+
+   const { data } = await client.query({
+      query: gql`
+         {
+            continents {
+               code
+            }
+         }
+      `,
+   })
+   console.log(data)
+   const paths = data.continents.map((continent) => {
+      return {
+         params: { code: continent.code },
+      }
+   })
+
+   return {
+      paths,
+      fallback: false,
+   }
+}
+
+export const getStaticProps = async (context) => {
+   const code = context.params.code
+   const client = new ApolloClient({
+      uri: 'https://countries.trevorblades.com/',
+      cache: new InMemoryCache(),
+   })
+   const { data } = await client.query({
+      query: gql`
+      {
+         continent(code: "${code}") {
+            name
+            countries {
+               name
+               code
+            }
+         }
+      }
+      `,
+   })
+
+   return {
+      props: {
+         continent: data.continent,
+      },
+   }
+}
+
+const Continent = ({ continent }) => {
+   console.log(continent)
+   return (
+      <div>
+         <h1>continent.name</h1>
+         {continent.countries.map((country) => (
+            <div key={country.code}>
+               <Link href={`/country/${country.code}`}>
+                  <a>{country.name}</a>
+               </Link>
+            </div>
+         ))}
+      </div>
+   )
+}
+
+export default Continent
