@@ -1,25 +1,24 @@
 .container {
    display: grid;
    grid-template-areas:
-      'navbar main main main'
-      'navbar main main main'
-      'navbar footer footer footer';
-   grid-template-rows: auto;
+      'm m m c c c c c c c c c'
+      'm m m c c c c c c c c c'
+      'm m m f f f f f f f f f';
+   grid-template-columns: repeat(12, 1fr);
+   grid-template-rows: auto auto 50px;
    border: 2px solid red;
-   height: 100vh;
+   height: 100%;
 }
 
 .navbar {
    border: 1px solid black;
-   grid-area: navbar;
+   grid-area: m;
 }
-.main {
+.content {
    border: 1px solid green;
-   grid-area: main;
-   height: 92vh;
+   grid-area: c;
 }
 .footer {
    border: 1px solid purple;
-   grid-area: footer;
-   height: 8vh;
+   grid-area: f;
 }

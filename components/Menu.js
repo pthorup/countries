@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import styles from '../styles/NavBar.module.css'
 
-const NavBar = () => {
+const Menu = () => {
    const [showSubMenu, setShowSubMenu] = useState('none')
    const [continents, setContinents] = useState([])
 
@@ -51,4 +51,4 @@ const NavBar = () => {
    )
 }
 
-export default NavBar
+export default Menu
