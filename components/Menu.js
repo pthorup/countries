@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
-import styles from '../styles/NavBar.module.css'
+import styles from '../styles/Menu.module.css'
 
 const Menu = () => {
    const [showSubMenu, setShowSubMenu] = useState('none')
@@ -31,6 +32,13 @@ const Menu = () => {
 
    return (
       <div className={styles.main}>
+         <Image
+            className={styles.logo}
+            src='/logo.png'
+            alt='Fun Learning Countries'
+            width={600}
+            height={419}
+         />
          <ul className={styles.menu}>
             <li className={styles.menuLink}>test</li>
             <li className={styles.menuLink}>
