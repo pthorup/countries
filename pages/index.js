@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
    return (
-      <div>
+      <div className={styles.content}>
          <Head>
             <title>Country Learning Fun</title>
             <meta

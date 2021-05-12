@@ -1,0 +1,28 @@
+.container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+.emoji {
+   font-size: 200px;
+}
+
+.countryInfo {
+   display: flex;
+   font-size: 18px;
+}
+
+.emoji,
+.countryInfo {
+   padding: 0 40px 0 40px;
+}
+
+.countryInfo li {
+   list-style: none;
+}
+
+.countryInfoHeading {
+   font-weight: 700;
+}

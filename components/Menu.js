@@ -48,9 +48,9 @@ const Menu = () => {
                </Link>
             </li>
             <li className={styles.menuLink}>
-               <span className={styles.subMenuTitle} onClick={handleMenuToggle}>
+               <a className={styles.subMenuTitle} onClick={handleMenuToggle}>
                   Continents
-               </span>
+               </a>
 
                <ul
                   className={styles.subMenu}

@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import Link from 'next/link'
+import styles from '../../styles/Continent.module.css'
 
 export const getStaticPaths = async () => {
    const client = new ApolloClient({
@@ -60,14 +61,16 @@ const Continent = ({ continent }) => {
    console.log(continent)
    return (
       <div>
-         <h1>continent.name</h1>
-         {continent.countries.map((country) => (
-            <div key={country.code}>
-               <Link href={`/country/${country.code}`}>
-                  <a>{country.name}</a>
-               </Link>
-            </div>
-         ))}
+         <h1>{continent.name}</h1>
+         <div className={styles.countryList}>
+            {continent.countries.map((country) => (
+               <div className={styles.listItem} key={country.code}>
+                  <Link href={`/country/${country.code}`}>
+                     <a>{country.name}</a>
+                  </Link>
+               </div>
+            ))}
+         </div>
       </div>
    )
 }

@@ -1,0 +1,16 @@
+.countryList {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   padding: 0 40px 0 40px;
+}
+
+.listItem {
+   margin: 8px;
+}
+
+@media (max-width: 800px) {
+   .countryList {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0;
+   }
+}

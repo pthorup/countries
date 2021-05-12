@@ -1,28 +1,29 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import { useEffect, useState } from 'react'
+import styles from '../styles/GuessCountry.module.css'
 
-// export const getStaticProps = async () => {
-//    const client = new ApolloClient({
-//       uri: 'https://countries.trevorblades.com/',
-//       cache: new InMemoryCache(),
-//    })
+export const getStaticProps = async () => {
+   const client = new ApolloClient({
+      uri: 'https://countries.trevorblades.com/',
+      cache: new InMemoryCache(),
+   })
 
-//    const { data } = await client.query({
-//       query: gql`
-//          {
-//             countries {
-//                name
-//             }
-//          }
-//       `,
-//    })
+   const { data } = await client.query({
+      query: gql`
+         {
+            countries {
+               name
+            }
+         }
+      `,
+   })
 
-//    return {
-//       props: {
-//          countries: data.countries,
-//       },
-//    }
-// }
+   return {
+      props: {
+         countries: data.countries,
+      },
+   }
+}
 
 const GuessCountry = ({ countries }) => {
    const [answerCountryLetters, setAnswerCountryLetters] = useState([])
@@ -64,10 +65,8 @@ const GuessCountry = ({ countries }) => {
 
    const getRandomCountry = () => {
       // Get Random Country
-      // const randomNum = Math.floor(Math.random() * countries.length)
-      // let countryRandom = [...countries[randomNum].name]
-
-      let countryRandom = ['A', 'a', 'c', ' ', 'e', 'f', 'w']
+      const randomNum = Math.floor(Math.random() * countries.length)
+      let countryRandom = [...countries[randomNum].name]
 
       // Make an array to hold hidden letters
       const countryRandomDashes = []
@@ -88,9 +87,6 @@ const GuessCountry = ({ countries }) => {
       getRandomCountry()
    }, [])
 
-   console.log(answerCountryLetters)
-   console.log(guessedLetters)
-
    const handleLetterClick = (e) => {
       let userChosenLetter = e.target.textContent
       const updateGuessLetters = [...guessedLetters]
@@ -108,42 +104,65 @@ const GuessCountry = ({ countries }) => {
 
    return (
       <div>
-         <h1>Guess Country</h1>
-         <div style={{ display: 'flex' }}>
-            {alphabet.map((letter) => (
-               <div key={letter}>
+         <h1>Guess the Country</h1>
+         <div className={styles.countryHidden}>
+            {guessedLetters.map((letter, index) => (
+               <div key={index} className={styles.countryHiddenLetter}>
+                  <div>{letter}</div>
+               </div>
+            ))}
+         </div>
+
+         <div className={styles.features}>
+            {userLives === 0 ? (
+               <div className={styles.gameLost}>
+                  <div>
+                     <p>Sorry, you ran out of lives.</p>
+                     <p>
+                        Correct answer is:{' '}
+                        <span className={styles.correctAnswer}>
+                           {answerCountryLetters.join('')}
+                        </span>{' '}
+                     </p>
+                  </div>
                   <button
-                     onClick={handleLetterClick}
-                     disabled={isGameOver || userLives === 0}
+                     className={styles.playAgainBtn}
+                     onClick={getRandomCountry}
                   >
-                     {letter}
+                     Play again
                   </button>
                </div>
-            ))}
-         </div>
-         <div style={{ color: 'red', display: 'flex' }}>
-            {guessedLetters.map((letter, index) => (
-               <div key={index} style={{ margin: '10px' }}>
-                  <div> {letter} </div>
+            ) : isGameOver ? (
+               <div className={styles.gameWon}>
+                  <div>You won!!!</div>
+                  <button
+                     className={styles.playAgainBtn}
+                     onClick={getRandomCountry}
+                  >
+                     Play again
+                  </button>
                </div>
-            ))}
+            ) : (
+               ''
+            )}
+            <div className={styles.lives}>Lives: {userLives}</div>
          </div>
-         <div style={{ color: 'green', fontSize: '40px' }}>{userLives}</div>
 
-         {userLives === 0 ? (
-            <div>
-               <div>Sorry, you ran out of lives :(</div>
-               <div>Correct answer is: {answerCountryLetters.join('')}</div>
-               <button onClick={getRandomCountry}>Play again</button>
+         <div className={styles.keyboardContainer}>
+            <div className={styles.keyboard}>
+               {alphabet.map((letter) => (
+                  <div key={letter}>
+                     <button
+                        className={styles.keyboardBtn}
+                        onClick={handleLetterClick}
+                        disabled={isGameOver || userLives === 0}
+                     >
+                        {letter}
+                     </button>
+                  </div>
+               ))}
             </div>
-         ) : isGameOver ? (
-            <div>
-               <div>You won!!!</div>
-               <button onClick={getRandomCountry}>Play again</button>
-            </div>
-         ) : (
-            ''
-         )}
+         </div>
       </div>
    )
 }

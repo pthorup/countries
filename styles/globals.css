@@ -12,6 +12,17 @@ a {
    text-decoration: none;
 }
 
+a:hover {
+   color: #04ad05;
+}
+
 * {
    box-sizing: border-box;
+}
+
+h1 {
+   font-size: 48px;
+   font-weight: 400;
+   text-align: center;
+   margin: 48px 0 48px;
 }
