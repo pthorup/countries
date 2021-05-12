@@ -1,33 +1,35 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import { useEffect, useState } from 'react'
 
-export const getStaticProps = async () => {
-   const client = new ApolloClient({
-      uri: 'https://countries.trevorblades.com/',
-      cache: new InMemoryCache(),
-   })
+// export const getStaticProps = async () => {
+//    const client = new ApolloClient({
+//       uri: 'https://countries.trevorblades.com/',
+//       cache: new InMemoryCache(),
+//    })
 
-   const { data } = await client.query({
-      query: gql`
-         {
-            countries {
-               name
-            }
-         }
-      `,
-   })
+//    const { data } = await client.query({
+//       query: gql`
+//          {
+//             countries {
+//                name
+//             }
+//          }
+//       `,
+//    })
 
-   return {
-      props: {
-         countries: data.countries,
-      },
-   }
-}
+//    return {
+//       props: {
+//          countries: data.countries,
+//       },
+//    }
+// }
 
 const GuessCountry = ({ countries }) => {
    const [answerCountryLetters, setAnswerCountryLetters] = useState([])
    const [guessedLetters, setGuessedLetters] = useState([])
-   const isGameOver = false
+   let isGameOver =
+      guessedLetters.length === 0 || guessedLetters.includes('_') ? false : true
+
    const alphabet = [
       'a',
       'b',
@@ -59,8 +61,10 @@ const GuessCountry = ({ countries }) => {
 
    const getRandomCountry = () => {
       // Get Random Country
-      const randomNum = Math.floor(Math.random() * countries.length)
-      let countryRandom = [...countries[randomNum].name]
+      // const randomNum = Math.floor(Math.random() * countries.length)
+      // let countryRandom = [...countries[randomNum].name]
+
+      let countryRandom = ['A', 'a', 'c', ' ', 'e']
 
       // Make an array to hold hidden letters
       const countryRandomDashes = []
@@ -93,7 +97,6 @@ const GuessCountry = ({ countries }) => {
             : ''
       }
       setGuessedLetters(updateGuessLetters)
-      isGameOver = guessedLetters.includes('_') ? false : true
    }
 
    return (
