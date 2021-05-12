@@ -32,15 +32,13 @@ const Menu = () => {
 
    return (
       <div className={styles.main}>
-         <div className={styles.logo}>
-            <Image
-               src='/logo.png'
-               alt='Fun Learning Countries'
-               width={600}
-               height={419}
-            />
-         </div>
-
+         <Image
+            className={styles.logo}
+            src='/logo.png'
+            alt='Fun Learning Countries'
+            width={600}
+            height={419}
+         />
          <ul className={styles.menu}>
             <li className={styles.menuLink}>
                <Link href='/'>
