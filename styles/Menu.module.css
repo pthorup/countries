@@ -1,4 +1,6 @@
 .main {
+   background-color: #000;
+   color: #fff;
    display: flex;
    align-items: center;
    flex-direction: column;
@@ -7,15 +9,51 @@
 }
 
 .menu {
-   border: 1px solid green;
    width: 100%;
    padding: 0;
+   font-size: 18px;
 }
 
 .menuLink {
+   font-weight: 500;
    list-style: none;
+   margin-bottom: 8px;
+}
+
+.menuLink:hover {
+   color: #04ad05;
+}
+
+.subMenu {
+   color: #ccc;
+}
+
+.subMenu:last-child {
+   margin: 16px 0 16px;
+}
+
+.subMenuTitle {
+   cursor: pointer;
 }
 
 .logo {
    width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+   .main {
+      align-items: flex-start;
+      flex-direction: row;
+      height: auto;
+   }
+   .logo {
+      width: 100px;
+   }
+   .menu {
+      display: flex;
+      justify-content: space-evenly;
+   }
+   .menuLink {
+      margin: 8px;
+   }
 }
