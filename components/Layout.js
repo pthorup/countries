@@ -5,7 +5,7 @@ import styles from '../styles/Layout.module.css'
 const Layout = ({ children }) => {
    return (
       <div className={styles.container}>
-         <div className={styles.navbar}>
+         <div className={styles.menu}>
             <Menu />
          </div>
          <main className={styles.content}>{children}</main>

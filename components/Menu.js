@@ -32,19 +32,30 @@ const Menu = () => {
 
    return (
       <div className={styles.main}>
-         <Image
-            className={styles.logo}
-            src='/logo.png'
-            alt='Fun Learning Countries'
-            width={600}
-            height={419}
-         />
-         <ul className={styles.menu}>
-            <li className={styles.menuLink}>test</li>
-            <li className={styles.menuLink}>
-               <span onClick={handleMenuToggle}>Continents</span>
+         <div className={styles.logo}>
+            <Image
+               src='/logo.png'
+               alt='Fun Learning Countries'
+               width={600}
+               height={419}
+            />
+         </div>
 
-               <ul style={{ display: `${showSubMenu}` }}>
+         <ul className={styles.menu}>
+            <li className={styles.menuLink}>
+               <Link href='/'>
+                  <a>Home</a>
+               </Link>
+            </li>
+            <li className={styles.menuLink}>
+               <span className={styles.subMenuTitle} onClick={handleMenuToggle}>
+                  Continents
+               </span>
+
+               <ul
+                  className={styles.subMenu}
+                  style={{ display: `${showSubMenu}` }}
+               >
                   {continents.map((continent) => (
                      <li key={continent.code} className={styles.menuLink}>
                         <Link href={`/continent/${continent.code}`}>
@@ -53,6 +64,11 @@ const Menu = () => {
                      </li>
                   ))}
                </ul>
+            </li>
+            <li className={styles.menuLink}>
+               <Link href='/guess-country'>
+                  <a>Play A Game</a>
+               </Link>
             </li>
          </ul>
       </div>
