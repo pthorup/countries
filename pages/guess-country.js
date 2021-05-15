@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import { useEffect, useState } from 'react'
+import GameOverCard from '../components/GameOverCard'
 import styles from '../styles/GuessCountry.module.css'
 
 export const getStaticProps = async () => {
@@ -114,37 +115,12 @@ const GuessCountry = ({ countries }) => {
          </div>
 
          <div className={styles.features}>
-            {userLives === 0 ? (
-               <div className={styles.gameLost}>
-                  <div>
-                     <p>Sorry, you ran out of lives.</p>
-                     <p>
-                        Correct answer is:{' '}
-                        <span className={styles.correctAnswer}>
-                           {answerCountryLetters.join('')}
-                        </span>{' '}
-                     </p>
-                  </div>
-                  <button
-                     className={styles.playAgainBtn}
-                     onClick={getRandomCountry}
-                  >
-                     Play again
-                  </button>
-               </div>
-            ) : isGameOver ? (
-               <div className={styles.gameWon}>
-                  <div>You won!!!</div>
-                  <button
-                     className={styles.playAgainBtn}
-                     onClick={getRandomCountry}
-                  >
-                     Play again
-                  </button>
-               </div>
-            ) : (
-               ''
-            )}
+            <GameOverCard
+               lives={userLives}
+               onRandomCountry={getRandomCountry}
+               answer={answerCountryLetters}
+               isGameOver={isGameOver}
+            />
             <div className={styles.lives}>Lives: {userLives}</div>
          </div>
 

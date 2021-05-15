@@ -1,0 +1,36 @@
+.gameLost,
+.gameWon {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   color: #098bf6;
+}
+.gameWon {
+   font-size: 40px;
+}
+
+.gameLost {
+   font-size: 18px;
+}
+.gameLost p {
+   margin: 0;
+}
+
+.correctAnswer {
+   color: #000;
+}
+
+.playAgainBtn {
+   color: #fff;
+   background-color: #e80960;
+   border: 1px solid #e80960;
+   border-radius: 0;
+   font-size: 18px;
+   margin: 24px;
+   padding: 8px 16px;
+}
+.playAgainBtn:hover,
+.keyboardBtn:hover {
+   color: #e80960;
+   background-color: #fff;
+}
