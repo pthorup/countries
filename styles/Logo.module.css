@@ -1,0 +1,11 @@
+.logo {
+   width: 70%;
+   margin: 40px 80px;
+}
+
+@media (max-width: 800px) {
+   .logo {
+      margin: 0;
+      width: 100px;
+   }
+}

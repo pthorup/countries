@@ -1,19 +1,11 @@
 import Menu from './Menu'
-import Image from 'next/image'
 import styles from '../styles/SideBar.module.css'
+import Logo from './Logo'
 
 const SideBar = () => {
    return (
       <div className={styles.main}>
-         <div className={styles.logo}>
-            <Image
-               src='/logo.png'
-               alt='Fun Learning Countries'
-               width={600}
-               height={419}
-            />
-         </div>
-
+         <Logo width={600} height={419} />
          <Menu />
       </div>
    )
