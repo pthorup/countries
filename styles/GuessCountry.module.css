@@ -22,30 +22,6 @@
    padding: 24px;
 }
 
-.keyboardContainer {
-   display: flex;
-   justify-content: center;
-}
-
-.keyboard {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   max-width: 600px;
-   width: 100%;
-}
-
-.keyboardBtn {
-   color: #fff;
-   background-color: #e80960;
-   border: 1px solid #e80960;
-   border-radius: 0;
-   font-size: 18px;
-   font-weight: 500;
-   margin: 4px;
-   padding: 8px 16px;
-}
-
 @media (max-width: 800px) {
    .countryHidden {
       display: flex;
@@ -62,10 +38,5 @@
    }
    .lives {
       text-align: center;
-   }
-
-   .gameLost,
-   .gameWon {
-      justify-content: center;
    }
 }

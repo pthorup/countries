@@ -34,3 +34,10 @@
    color: #e80960;
    background-color: #fff;
 }
+
+@media (max-width: 800px) {
+   .gameLost,
+   .gameWon {
+      justify-content: center;
+   }
+}

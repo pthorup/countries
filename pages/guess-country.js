@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import GameOverCard from '../components/GameOverCard'
+import Keyboard from '../components/Keyboard'
 import styles from '../styles/GuessCountry.module.css'
 
 export const getStaticProps = async () => {
@@ -124,21 +125,12 @@ const GuessCountry = ({ countries }) => {
             <div className={styles.lives}>Lives: {userLives}</div>
          </div>
 
-         <div className={styles.keyboardContainer}>
-            <div className={styles.keyboard}>
-               {alphabet.map((letter) => (
-                  <div key={letter}>
-                     <button
-                        className={styles.keyboardBtn}
-                        onClick={handleLetterClick}
-                        disabled={isGameOver || userLives === 0}
-                     >
-                        {letter}
-                     </button>
-                  </div>
-               ))}
-            </div>
-         </div>
+         <Keyboard
+            onLetterClick={handleLetterClick}
+            alphabet={alphabet}
+            isGameOver={isGameOver}
+            lives={userLives}
+         />
       </div>
    )
 }
