@@ -58,7 +58,6 @@ export const getStaticProps = async (context) => {
 }
 
 const Continent = ({ continent }) => {
-   console.log(continent)
    return (
       <div>
          <h1>{continent.name}</h1>

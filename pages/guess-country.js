@@ -119,7 +119,7 @@ const GuessCountry = ({ countries }) => {
             <GameOverCard
                lives={userLives}
                onRandomCountry={getRandomCountry}
-               answer={answerCountryLetters}
+               answer={answerCountryLetters.join('')}
                isGameOver={isGameOver}
             />
             <div className={styles.lives}>Lives: {userLives}</div>

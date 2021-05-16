@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu links 1`] = `
+<ul
+  className="menu"
+>
+  <li
+    className="menuLink"
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      Home
+    </a>
+  </li>
+  <li
+    className="menuLink"
+  >
+    <a
+      className="subMenuTitle"
+      onClick={[Function]}
+    >
+      Continents
+    </a>
+    <ul
+      className="subMenu"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    />
+  </li>
+  <li
+    className="menuLink"
+  >
+    <a
+      href="/guess-country"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      Play A Game
+    </a>
+  </li>
+</ul>
+`;

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when isGameOver is true 1`] = `
+<div
+  className="gameWon"
+>
+  <div>
+    You won!!!
+  </div>
+  <button
+    className="playAgainBtn"
+    onClick={[MockFunction]}
+  >
+    Play again
+  </button>
+</div>
+`;
+
+exports[`when lives are over 1`] = `
+<div
+  className="gameLost"
+>
+  <div>
+    <p>
+      Sorry, you ran out of lives.
+    </p>
+    <p>
+      Correct answer is:
+       
+      <span
+        className="correctAnswer"
+      >
+        Sweden
+      </span>
+       
+    </p>
+  </div>
+  <button
+    className="playAgainBtn"
+    onClick={[MockFunction]}
+  >
+    Play again
+  </button>
+</div>
+`;

@@ -9,9 +9,7 @@ const GameOverCard = ({ lives, onRandomCountry, answer, isGameOver }) => {
                   <p>Sorry, you ran out of lives.</p>
                   <p>
                      Correct answer is:{' '}
-                     <span className={styles.correctAnswer}>
-                        {answer.join('')}
-                     </span>{' '}
+                     <span className={styles.correctAnswer}>{answer}</span>{' '}
                   </p>
                </div>
                <button
