@@ -30,7 +30,7 @@ export const getStaticProps = async () => {
 const GuessCountry = ({ countries }) => {
    const [answerCountryLetters, setAnswerCountryLetters] = useState([])
    const [guessedLetters, setGuessedLetters] = useState([])
-   const maxLives = 5
+   const maxLives = 7
    const [userLives, setUserLives] = useState(maxLives)
 
    let isGameOver =
