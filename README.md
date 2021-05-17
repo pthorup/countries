@@ -2,6 +2,8 @@
 
 This app is made as my solution to an assignment on Next.js. It is a simple app that displays a list of countries grouped by continents. It also has a country-guessing game.
 
+[View demo](https://countries-beta.vercel.app/)
+
 ## Tech Used
 
 -  [Next.js](https://nextjs.org/) bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
