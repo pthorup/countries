@@ -7,6 +7,7 @@ const Keyboard = ({ onLetterClick, alphabet, isGameOver, lives }) => {
             {alphabet.map((letter) => (
                <div key={letter}>
                   <button
+                     data-testid='keyboard-btn'
                      className={styles.keyboardBtn}
                      onClick={onLetterClick}
                      disabled={isGameOver || lives === 0}

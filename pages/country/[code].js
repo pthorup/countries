@@ -63,7 +63,7 @@ const CountryDetail = ({ country }) => {
    }
 
    return (
-      <>
+      <div data-testid={'country-info'}>
          <h1>{country.name}</h1>
          <div className={styles.container}>
             <div className={styles.emoji}>{country.emoji}</div>
@@ -82,7 +82,7 @@ const CountryDetail = ({ country }) => {
                </ul>
             </div>
          </div>
-      </>
+      </div>
    )
 }
 
