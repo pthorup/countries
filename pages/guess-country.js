@@ -4,28 +4,28 @@ import GameOverCard from '../components/GameOverCard'
 import Keyboard from '../components/Keyboard'
 import styles from '../styles/GuessCountry.module.css'
 
-// export const getStaticProps = async () => {
-//    const client = new ApolloClient({
-//       uri: 'https://countries.trevorblades.com/',
-//       cache: new InMemoryCache(),
-//    })
+export const getStaticProps = async () => {
+   const client = new ApolloClient({
+      uri: 'https://countries.trevorblades.com/',
+      cache: new InMemoryCache(),
+   })
 
-//    const { data } = await client.query({
-//       query: gql`
-//          {
-//             countries {
-//                name
-//             }
-//          }
-//       `,
-//    })
+   const { data } = await client.query({
+      query: gql`
+         {
+            countries {
+               name
+            }
+         }
+      `,
+   })
 
-//    return {
-//       props: {
-//          countries: data.countries,
-//       },
-//    }
-// }
+   return {
+      props: {
+         countries: data.countries,
+      },
+   }
+}
 
 const GuessCountry = ({ countries }) => {
    const [answerCountryLetters, setAnswerCountryLetters] = useState([])
@@ -70,10 +70,8 @@ const GuessCountry = ({ countries }) => {
 
    const getRandomCountry = () => {
       // Get Random Country
-      // const randomNum = Math.floor(Math.random() * countries.length)
-      // let countryRandom = [...countries[randomNum].name]
-
-      let countryRandom = ['a', 'b', 'c']
+      const randomNum = Math.floor(Math.random() * countries.length)
+      let countryRandom = [...countries[randomNum].name]
 
       // Make an array to hold hidden letters
       const countryRandomDashes = []
