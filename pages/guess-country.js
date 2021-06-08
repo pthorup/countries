@@ -1,40 +1,43 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import GameOverCard from '../components/GameOverCard'
 import Keyboard from '../components/Keyboard'
 import styles from '../styles/GuessCountry.module.css'
 
-export const getStaticProps = async () => {
-   const client = new ApolloClient({
-      uri: 'https://countries.trevorblades.com/',
-      cache: new InMemoryCache(),
-   })
+// export const getStaticProps = async () => {
+//    const client = new ApolloClient({
+//       uri: 'https://countries.trevorblades.com/',
+//       cache: new InMemoryCache(),
+//    })
 
-   const { data } = await client.query({
-      query: gql`
-         {
-            countries {
-               name
-            }
-         }
-      `,
-   })
+//    const { data } = await client.query({
+//       query: gql`
+//          {
+//             countries {
+//                name
+//             }
+//          }
+//       `,
+//    })
 
-   return {
-      props: {
-         countries: data.countries,
-      },
-   }
-}
+//    return {
+//       props: {
+//          countries: data.countries,
+//       },
+//    }
+// }
 
 const GuessCountry = ({ countries }) => {
    const [answerCountryLetters, setAnswerCountryLetters] = useState([])
-   const [guessedLetters, setGuessedLetters] = useState([])
+   const [correctGuessedLetters, setCorrectGuessedLetters] = useState([])
+   const [allGuessedLetters, setAllGuessedLetters] = useState([])
    const maxLives = 7
    const [userLives, setUserLives] = useState(maxLives)
-
-   let isGameOver =
-      guessedLetters.length === 0 || guessedLetters.includes('_') ? false : true
+   let isGameOver = !correctGuessedLetters.includes('_')
+      ? true
+      : userLives > 0
+      ? false
+      : true
 
    const alphabet = [
       'a',
@@ -67,8 +70,10 @@ const GuessCountry = ({ countries }) => {
 
    const getRandomCountry = () => {
       // Get Random Country
-      const randomNum = Math.floor(Math.random() * countries.length)
-      let countryRandom = [...countries[randomNum].name]
+      // const randomNum = Math.floor(Math.random() * countries.length)
+      // let countryRandom = [...countries[randomNum].name]
+
+      let countryRandom = ['a', 'b', 'c']
 
       // Make an array to hold hidden letters
       const countryRandomDashes = []
@@ -81,8 +86,9 @@ const GuessCountry = ({ countries }) => {
       }
       // Set answer and user's guessed letters to respective states
       setAnswerCountryLetters(countryRandom)
-      setGuessedLetters(countryRandomDashes)
+      setCorrectGuessedLetters(countryRandomDashes)
       setUserLives(maxLives)
+      setAllGuessedLetters([])
    }
 
    useEffect(() => {
@@ -90,8 +96,8 @@ const GuessCountry = ({ countries }) => {
    }, [])
 
    const handleLetterClick = (e) => {
-      let userChosenLetter = e.target.textContent
-      const updateGuessLetters = [...guessedLetters]
+      const userChosenLetter = e.target.textContent
+      const updateGuessLetters = [...correctGuessedLetters]
       let isCorrectLetter = false
 
       for (let i = 0; i < answerCountryLetters.length; i++) {
@@ -100,15 +106,18 @@ const GuessCountry = ({ countries }) => {
             isCorrectLetter = true
          }
       }
-      setGuessedLetters(updateGuessLetters)
+      setCorrectGuessedLetters(updateGuessLetters)
       !isCorrectLetter ? setUserLives((prev) => prev - 1) : ''
+
+      // track all chosen letters
+      setAllGuessedLetters((prev) => [...prev, userChosenLetter])
    }
 
    return (
       <div>
          <h1>Guess the Country</h1>
          <div className={styles.countryHidden}>
-            {guessedLetters.map((letter, index) => (
+            {correctGuessedLetters.map((letter, index) => (
                <div key={index} className={styles.countryHiddenLetter}>
                   <div>{letter}</div>
                </div>
@@ -130,9 +139,25 @@ const GuessCountry = ({ countries }) => {
             alphabet={alphabet}
             isGameOver={isGameOver}
             lives={userLives}
+            allGuessedLetters={allGuessedLetters}
          />
       </div>
    )
 }
 
 export default GuessCountry
+
+/*
+
+1.
+The app would be more stable/secure if you had one variable for game over and one determining if won or lost. Could be something like this:
+   let isGameOver =
+      guessedLetters.length === 0 || guessedLetters.includes('_') || userLives> 0 ? false : true
+Then in e.g. the comp KeyBoard only isGameOver would be needed.
+
+2.
+The submenu to the left would preferably be a comp. Then you could use a ternary to toggle the display wit a bool, the code would be simpler. 
+Your solution have the advantage of no re-rendering on each click, however that is critical here. 
+
+
+*/

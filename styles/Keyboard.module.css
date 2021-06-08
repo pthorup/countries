@@ -21,3 +21,9 @@
    margin: 4px;
    padding: 8px 16px;
 }
+
+.keyboardBtn:disabled,
+.keyboardBtn[disabled] {
+   background-color: #ea88ae;
+   border: 1px solid #ea88ae;
+}

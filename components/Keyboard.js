@@ -1,6 +1,12 @@
 import styles from '../styles/Keyboard.module.css'
 
-const Keyboard = ({ onLetterClick, alphabet, isGameOver, lives }) => {
+const Keyboard = ({
+   onLetterClick,
+   alphabet,
+   isGameOver,
+   allGuessedLetters,
+}) => {
+   console.log(allGuessedLetters)
    return (
       <div className={styles.keyboardContainer}>
          <div className={styles.keyboard}>
@@ -10,7 +16,11 @@ const Keyboard = ({ onLetterClick, alphabet, isGameOver, lives }) => {
                      data-testid='keyboard-btn'
                      className={styles.keyboardBtn}
                      onClick={onLetterClick}
-                     disabled={isGameOver || lives === 0}
+                     disabled={
+                        allGuessedLetters.includes(letter) || isGameOver
+                           ? true
+                           : false
+                     }
                   >
                      {letter}
                   </button>
