@@ -17,6 +17,7 @@ export const getStaticPaths = async () => {
          }
       `,
    })
+
    const paths = data.countries.map((country) => {
       return {
          params: { code: country.code },
@@ -56,7 +57,7 @@ export const getStaticProps = async (context) => {
    const searchTerm = countryName.replace(/\s/g, '%20')
    // fetch data from wikipedia limit 2 and term search in title
    const response = await fetch(
-      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=2`
+      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`
    )
 
    const wikiData = await response.json()
@@ -72,7 +73,7 @@ export const getStaticProps = async (context) => {
 const CountryDetail = ({ country, wikiData }) => {
    const articleOne = wikiData[Object.keys(wikiData)[0]]
    const articleTwo = wikiData[Object.keys(wikiData)[1]]
-
+   const articleThree = wikiData[Object.keys(wikiData)[2]]
    const displayLanguages = () => {
       const languages = country.languages.map((lang) => lang.name)
       return languages.join(', ')
@@ -96,14 +97,6 @@ const CountryDetail = ({ country, wikiData }) => {
                   <li>{country.capital}</li>
                   <li>{country.currency}</li>
                   <li>{displayLanguages()}</li>
-                  <li>
-                     <a
-                        href={wikiData[Object.keys(wikiData)[0]].fullurl}
-                        target='_blank'
-                     >
-                        {wikiData[Object.keys(wikiData)[0]].title}
-                     </a>
-                  </li>
                </ul>
             </div>
             <div className={styles.countryExtraInfo}>
@@ -127,6 +120,16 @@ const CountryDetail = ({ country, wikiData }) => {
                         target='_blank'
                      >
                         {articleTwo.title}
+                     </a>
+                  </li>
+                  <li>
+                     <a
+                        className={styles.learnMoreLink}
+                        href={articleThree.fullurl}
+                        rel='noopener noreferrer'
+                        target='_blank'
+                     >
+                        {articleThree.title}
                      </a>
                   </li>
                </ul>

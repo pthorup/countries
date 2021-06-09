@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import GameOverCard from '../components/GameOverCard'
 import Keyboard from '../components/Keyboard'
 import styles from '../styles/GuessCountry.module.css'
