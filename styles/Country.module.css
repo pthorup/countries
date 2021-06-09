@@ -1,28 +1,44 @@
 .container {
-   display: flex;
+   display: grid;
+   grid-template-areas:
+      '. . . flag countryInfo countryInfo . . . '
+      '. . . countryExtraInfo countryExtraInfo countryExtraInfo . . . ';
    align-items: center;
-   justify-content: center;
-   flex-wrap: wrap;
 }
 
 .emoji {
    font-size: 200px;
+   grid-area: flag;
 }
 
 .countryInfo {
    display: flex;
    font-size: 18px;
+   grid-area: countryInfo;
 }
 
-.emoji,
-.countryInfo {
-   padding: 0 40px 0 40px;
-}
-
-.countryInfo li {
+.countryInfo li,
+.countryExtraInfo li {
    list-style: none;
+   padding-bottom: 12px;
 }
 
 .countryInfoHeading {
    font-weight: 700;
+}
+
+.countryExtraInfo {
+   grid-area: countryExtraInfo;
+}
+
+.countryExtraInfo ul {
+   padding: 0;
+}
+
+.learnMoreTitle {
+   border-bottom: 1px solid grey;
+   padding-bottom: 8px;
+}
+
+.learnMoreLink {
 }

@@ -17,7 +17,6 @@ export const getStaticPaths = async () => {
          }
       `,
    })
-   console.log(data)
    const paths = data.continents.map((continent) => {
       return {
          params: { code: continent.code },

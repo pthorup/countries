@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import styles from '../../styles/Country.module.css'
 
+// Get all countries data
 export const getStaticPaths = async () => {
    const client = new ApolloClient({
       uri: 'https://countries.trevorblades.com/',
@@ -49,18 +50,34 @@ export const getStaticProps = async (context) => {
          }
       `,
    })
+
+   const countryName = data.country.name
+   // replace spaces with '%20' which wikipedia requires instead on spaces in the search term
+   const searchTerm = countryName.replace(/\s/g, '%20')
+   // fetch data from wikipedia limit 2 and term search in title
+   const response = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=2`
+   )
+
+   const wikiData = await response.json()
+
    return {
       props: {
          country: data.country,
+         wikiData: wikiData.query.pages,
       },
    }
 }
 
-const CountryDetail = ({ country }) => {
+const CountryDetail = ({ country, wikiData }) => {
+   const articleOne = wikiData[Object.keys(wikiData)[0]]
+   const articleTwo = wikiData[Object.keys(wikiData)[1]]
+
    const displayLanguages = () => {
       const languages = country.languages.map((lang) => lang.name)
       return languages.join(', ')
    }
+   console.log(articleOne.fullurl)
 
    return (
       <div data-testid={'country-info'}>
@@ -79,6 +96,39 @@ const CountryDetail = ({ country }) => {
                   <li>{country.capital}</li>
                   <li>{country.currency}</li>
                   <li>{displayLanguages()}</li>
+                  <li>
+                     <a
+                        href={wikiData[Object.keys(wikiData)[0]].fullurl}
+                        target='_blank'
+                     >
+                        {wikiData[Object.keys(wikiData)[0]].title}
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <div className={styles.countryExtraInfo}>
+               <h3 className={styles.learnMoreTitle}>Article Links:</h3>
+               <ul>
+                  <li>
+                     <a
+                        className={styles.learnMoreLink}
+                        href={articleOne.fullurl}
+                        rel='noopener noreferrer'
+                        target='_blank'
+                     >
+                        {articleOne.title}
+                     </a>
+                  </li>
+                  <li>
+                     <a
+                        className={styles.learnMoreLink}
+                        href={articleTwo.fullurl}
+                        rel='noopener noreferrer'
+                        target='_blank'
+                     >
+                        {articleTwo.title}
+                     </a>
+                  </li>
                </ul>
             </div>
          </div>
