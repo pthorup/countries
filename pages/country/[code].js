@@ -56,7 +56,8 @@ export const getStaticProps = async (context) => {
    // replace spaces with '%20' which wikipedia requires instead on spaces in the search term
    const searchTerm = countryName.replace(/\s/g, '%20')
    // fetch data from wikipedia limit 2 and term search in title
-
+   let wikiData = []
+   let error = ''
    try {
       const response = await fetch(
          `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`,
@@ -64,16 +65,15 @@ export const getStaticProps = async (context) => {
             method: 'GET',
             headers: {
                // update with your user-agent
-               'User-Agent':
-                  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+               'User-Agent': '',
                Accept: 'application/json; charset=UTF-8',
             },
          }
       )
 
-      const wikiData = await response.json()
+      wikiData = await response.json()
    } catch (e) {
-      const error = e.toString()
+      error = e.toString()
    }
 
    return {
