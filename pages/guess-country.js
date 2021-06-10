@@ -1,37 +1,39 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import GameOverCard from '../components/GameOverCard'
 import Keyboard from '../components/Keyboard'
 import styles from '../styles/GuessCountry.module.css'
 
-// export const getStaticProps = async () => {
-//    const client = new ApolloClient({
-//       uri: 'https://countries.trevorblades.com/',
-//       cache: new InMemoryCache(),
-//    })
+export const getStaticProps = async () => {
+   const client = new ApolloClient({
+      uri: 'https://countries.trevorblades.com/',
+      cache: new InMemoryCache(),
+   })
 
-//    const { data } = await client.query({
-//       query: gql`
-//          {
-//             countries {
-//                name
-//             }
-//          }
-//       `,
-//    })
+   const { data } = await client.query({
+      query: gql`
+         {
+            countries {
+               name
+               code
+            }
+         }
+      `,
+   })
 
-//    return {
-//       props: {
-//          countries: data.countries,
-//       },
-//    }
-// }
+   return {
+      props: {
+         countries: data.countries,
+      },
+   }
+}
 
 const GuessCountry = ({ countries }) => {
    const [answerCountryLetters, setAnswerCountryLetters] = useState([])
    const [correctGuessedLetters, setCorrectGuessedLetters] = useState([])
    const [allGuessedLetters, setAllGuessedLetters] = useState([])
    const maxLives = 7
+   const [countryCode, setCountryCode] = useState(' ')
    const [userLives, setUserLives] = useState(maxLives)
    let isGameOver = !correctGuessedLetters.includes('_')
       ? true
@@ -70,32 +72,11 @@ const GuessCountry = ({ countries }) => {
 
    const getRandomCountry = () => {
       // Get Random Country
-      // const randomNum = Math.floor(Math.random() * countries.length)
-      // let countryRandom = [...countries[randomNum].name]
-
-      let countryRandom = [
-         'a',
-         'b',
-         'a',
-         'b',
-         'a',
-         'b',
-         'a',
-         'b',
-         'a',
-         ' ',
-         'a',
-         'b',
-         'a',
-         'b',
-         'a',
-         ' ',
-         'a',
-         'b',
-         'a',
-         'b',
-         'a',
-      ]
+      const randomNum = Math.floor(Math.random() * countries.length)
+      let countryRandom = [...countries[randomNum].name]
+      setCountryCode(countries[randomNum].code)
+      console.log(countryRandom)
+      console.log(countryCode)
       // Make an array to hold hidden letters
       const countryRandomDashes = []
       for (let i = 0; i < countryRandom.length; i++) {
@@ -151,6 +132,7 @@ const GuessCountry = ({ countries }) => {
                onRandomCountry={getRandomCountry}
                answer={answerCountryLetters.join('')}
                isGameOver={isGameOver}
+               countryCode={countryCode}
             />
             <div className={styles.lives}>Lives: {userLives}</div>
          </div>

@@ -1,6 +1,14 @@
 import styles from '../styles/GameOverCard.module.css'
+import Link from 'next/link'
 
-const GameOverCard = ({ lives, onRandomCountry, answer, isGameOver }) => {
+const GameOverCard = ({
+   lives,
+   onRandomCountry,
+   answer,
+   isGameOver,
+   countryCode,
+}) => {
+   console.log('gameover card: ' + countryCode)
    return (
       <div className={styles.container}>
          {lives === 0 ? (
@@ -10,12 +18,16 @@ const GameOverCard = ({ lives, onRandomCountry, answer, isGameOver }) => {
                   <span className={styles.correctAnswer}> {answer}</span>
                </div>
                <div className={styles.btnContainer}>
-                  <button
-                     className={styles.learnMoreBtn}
-                     onClick={onRandomCountry}
-                  >
-                     Learn more about the country
-                  </button>
+                  {countryCode ? (
+                     <Link href={`/country/${countryCode}`}>
+                        <a className={styles.learnMoreBtn}>
+                           Learn more about the country
+                        </a>
+                     </Link>
+                  ) : (
+                     ''
+                  )}
+
                   <button
                      className={styles.playAgainBtn}
                      onClick={onRandomCountry}
@@ -27,15 +39,19 @@ const GameOverCard = ({ lives, onRandomCountry, answer, isGameOver }) => {
          ) : isGameOver ? (
             <div>
                <div className={styles.message}>
-                  <span>You Won!</span>
+                  <span>YOU WON!</span>
                </div>
                <div className={styles.btnContainer}>
-                  <button
-                     className={styles.learnMoreBtn}
-                     onClick={onRandomCountry}
-                  >
-                     Learn more about the country
-                  </button>
+                  {countryCode ? (
+                     <Link href={`/country/${countryCode}`}>
+                        <a className={styles.learnMoreBtn}>
+                           Learn more about the country
+                        </a>
+                     </Link>
+                  ) : (
+                     ''
+                  )}
+
                   <button
                      className={styles.playAgainBtn}
                      onClick={onRandomCountry}
