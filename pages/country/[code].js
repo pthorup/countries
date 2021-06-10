@@ -60,7 +60,13 @@ export const getStaticProps = async (context) => {
    let error = ''
    try {
       const response = await fetch(
-         `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`
+         `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`,
+         {
+            headers: {
+               Accept: 'application/json, text/plain, */*',
+               'User-Agent': '*',
+            },
+         }
       )
 
       wikiData = await response.json()
