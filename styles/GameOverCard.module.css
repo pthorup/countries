@@ -1,43 +1,59 @@
-.gameLost,
-.gameWon {
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
-   color: #098bf6;
-}
-.gameWon {
-   font-size: 40px;
+.container {
+   text-align: center;
 }
 
-.gameLost {
-   font-size: 18px;
+.message {
+   font-size: 24px;
+   color: #098bf6;
 }
-.gameLost p {
-   margin: 0;
+.message span {
+   display: block;
 }
 
 .correctAnswer {
    color: #000;
 }
 
+.btnContainer {
+   display: flex;
+   justify-content: center;
+}
+
+.learnMoreBtn {
+   background-color: #04ad05;
+   border: 1px solid #04ad05;
+}
+
 .playAgainBtn {
-   color: #fff;
    background-color: #e80960;
    border: 1px solid #e80960;
+}
+
+.playAgainBtn,
+.learnMoreBtn {
+   color: #fff;
    border-radius: 0;
    font-size: 18px;
    margin: 24px;
    padding: 8px 16px;
+   min-height: 100px;
+   width: 200px;
 }
+
 .playAgainBtn:hover,
 .keyboardBtn:hover {
    color: #e80960;
    background-color: #fff;
 }
 
+.learnMoreBtn:hover {
+   color: #04ad05;
+   background-color: #fff;
+}
+
 @media (max-width: 800px) {
-   .gameLost,
+   /* .gameLost,
    .gameWon {
       justify-content: center;
-   }
+   } */
 }

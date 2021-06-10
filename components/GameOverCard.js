@@ -2,37 +2,52 @@ import styles from '../styles/GameOverCard.module.css'
 
 const GameOverCard = ({ lives, onRandomCountry, answer, isGameOver }) => {
    return (
-      <>
+      <div className={styles.container}>
          {lives === 0 ? (
-            <div className={styles.gameLost}>
-               <div>
-                  <p>Sorry, you ran out of lives.</p>
-                  <p>
-                     Correct answer is:{' '}
-                     <span className={styles.correctAnswer}>{answer}</span>{' '}
-                  </p>
+            <div>
+               <div className={styles.message}>
+                  <span>Sorry, you ran out of lives. Correct answer is:</span>
+                  <span className={styles.correctAnswer}> {answer}</span>
                </div>
-               <button
-                  className={styles.playAgainBtn}
-                  onClick={onRandomCountry}
-               >
-                  Play again
-               </button>
+               <div className={styles.btnContainer}>
+                  <button
+                     className={styles.learnMoreBtn}
+                     onClick={onRandomCountry}
+                  >
+                     Learn more about the country
+                  </button>
+                  <button
+                     className={styles.playAgainBtn}
+                     onClick={onRandomCountry}
+                  >
+                     Play again
+                  </button>
+               </div>
             </div>
          ) : isGameOver ? (
-            <div className={styles.gameWon}>
-               <div>You won!!!</div>
-               <button
-                  className={styles.playAgainBtn}
-                  onClick={onRandomCountry}
-               >
-                  Play again
-               </button>
+            <div>
+               <div className={styles.message}>
+                  <span>You Won!</span>
+               </div>
+               <div className={styles.btnContainer}>
+                  <button
+                     className={styles.learnMoreBtn}
+                     onClick={onRandomCountry}
+                  >
+                     Learn more about the country
+                  </button>
+                  <button
+                     className={styles.playAgainBtn}
+                     onClick={onRandomCountry}
+                  >
+                     Play again
+                  </button>
+               </div>
             </div>
          ) : (
             ''
          )}
-      </>
+      </div>
    )
 }
 
