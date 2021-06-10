@@ -52,49 +52,48 @@ export const getStaticProps = async (context) => {
       `,
    })
 
-   const countryName = data.country.name
-   // replace spaces with '%20' which wikipedia requires instead on spaces in the search term
-   const searchTerm = countryName.replace(/\s/g, '%20')
-   // fetch data from wikipedia limit 2 and term search in title
-   let wikiData = []
-   let error = ''
-   try {
-      const response = await fetch(
-         `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`,
-         {
-            method: 'GET',
-            headers: {
-               // update with your user-agent
-               'User-Agent': '',
-               Accept: 'application/json; charset=UTF-8',
-            },
-         }
-      )
+   // const countryName = data.country.name
+   // // replace spaces with '%20' which wikipedia requires instead on spaces in the search term
+   // const searchTerm = countryName.replace(/\s/g, '%20')
+   // // fetch data from wikipedia limit 2 and term search in title
+   // let wikiData = []
+   // let error = ''
+   // try {
+   //    const response = await fetch(
+   //       `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`,
+   //       {
+   //          method: 'GET',
+   //          headers: {
+   //             // update with your user-agent
+   //             'User-Agent': '',
+   //             Accept: 'application/json; charset=UTF-8',
+   //          },
+   //       }
+   //    )
 
-      wikiData = await response.json()
-   } catch (e) {
-      error = e.toString()
-   }
+   //    wikiData = await response.json()
+   // } catch (e) {
+   //    error = e.toString()
+   // }
 
    return {
       props: {
          country: data.country,
-         wikiData: wikiData.query.pages,
-         error: error,
+         // wikiData: wikiData.query.pages,
+         // error: error,
       },
    }
 }
 
 const CountryDetail = ({ country, wikiData, error }) => {
    // TODO: check for Wikipedia fetch error and country fetch
-   const articleOne = wikiData[Object.keys(wikiData)[0]]
-   const articleTwo = wikiData[Object.keys(wikiData)[1]]
-   const articleThree = wikiData[Object.keys(wikiData)[2]]
+   // const articleOne = wikiData[Object.keys(wikiData)[0]]
+   // const articleTwo = wikiData[Object.keys(wikiData)[1]]
+   // const articleThree = wikiData[Object.keys(wikiData)[2]]
    const displayLanguages = () => {
       const languages = country.languages.map((lang) => lang.name)
       return languages.join(', ')
    }
-   console.log(articleOne.fullurl)
 
    return (
       <div data-testid={'country-info'}>
@@ -117,7 +116,7 @@ const CountryDetail = ({ country, wikiData, error }) => {
             </div>
             <div className={styles.countryExtraInfo}>
                <h3 className={styles.learnMoreTitle}>Article Links:</h3>
-               <ul>
+               {/* <ul>
                   <li>
                      <a
                         className={styles.learnMoreLink}
@@ -148,7 +147,7 @@ const CountryDetail = ({ country, wikiData, error }) => {
                         {articleThree.title}
                      </a>
                   </li>
-               </ul>
+               </ul> */}
             </div>
          </div>
       </div>
