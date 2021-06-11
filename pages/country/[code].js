@@ -58,7 +58,7 @@ export const getStaticProps = async (context) => {
    // fetch data from wikipedia limit 2 and term search in title
 
    const response = await fetch(
-      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&utf8=1&gsrlimit=3`,
+      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=intitle:${searchTerm}&prop=info|extracts|pageimages&inprop=url&exintro=1&exlimit=10&exchars=400&format=json&inprop=url&gsrlimit=3`,
       {
          headers: {
             contentType: 'application/json; charset=utf-8',
