@@ -8,7 +8,6 @@ const GameOverCard = ({
    isGameOver,
    countryCode,
 }) => {
-   console.log('gameover card: ' + countryCode)
    return (
       <div className={styles.container}>
          {lives === 0 ? (

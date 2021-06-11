@@ -6,7 +6,6 @@ const Keyboard = ({
    isGameOver,
    allGuessedLetters,
 }) => {
-   console.log(allGuessedLetters)
    return (
       <div className={styles.keyboardContainer}>
          <div className={styles.keyboard}>

@@ -75,8 +75,7 @@ const GuessCountry = ({ countries }) => {
       const randomNum = Math.floor(Math.random() * countries.length)
       let countryRandom = [...countries[randomNum].name]
       setCountryCode(countries[randomNum].code)
-      console.log(countryRandom)
-      console.log(countryCode)
+
       // Make an array to hold hidden letters
       const countryRandomDashes = []
       for (let i = 0; i < countryRandom.length; i++) {
